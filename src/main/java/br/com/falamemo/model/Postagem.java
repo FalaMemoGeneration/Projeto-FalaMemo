@@ -1,12 +1,15 @@
 package br.com.falamemo.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
@@ -53,6 +56,10 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 
+	@OneToMany(mappedBy = "postagem", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("postagem")
+	private List<Usuario> usuario;
+	
 	public Long getId() {
 		return id;
 	}
@@ -115,6 +122,14 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+
+	public List<Usuario> getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(List<Usuario> usuario) {
+		this.usuario = usuario;
 	}
 
 }
