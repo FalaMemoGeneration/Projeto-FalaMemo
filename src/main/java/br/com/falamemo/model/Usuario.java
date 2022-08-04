@@ -1,10 +1,13 @@
 package br.com.falamemo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
@@ -19,38 +22,38 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String nome;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String email;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String senha;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String foto;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String genero;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String orientacao;
-	
+
 	@AssertTrue
 	private Boolean pcd;
 
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private Usuario usuario;
-	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagem;
+
 	public Long getId() {
 		return id;
 	}
@@ -115,12 +118,12 @@ public class Usuario {
 		this.pcd = pcd;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<Postagem> getPostagem() {
+		return postagem;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
 
 }
