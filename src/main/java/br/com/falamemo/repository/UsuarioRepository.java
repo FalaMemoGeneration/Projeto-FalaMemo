@@ -1,4 +1,4 @@
-package main.java.br.com.falamemo.repository;
+package br.com.falamemo.repository;
 
 import br.com.falamemo.model.Usuario;
 import org.springframework.stereotype.Repository;
