@@ -1,4 +1,4 @@
-package main.java.br.com.falamemo.model;
+package br.com.falamemo.model;
 
 public class UsuarioLogin {
 
