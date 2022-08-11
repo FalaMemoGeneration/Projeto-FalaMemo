@@ -1,19 +1,13 @@
 package br.com.falamemo.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -29,7 +23,8 @@ public class Usuario {
 
 	@NotBlank
 	@Size(min = 3, max = 255)
-	private String email;
+	@Email
+	private String usuario;
 
 	@NotBlank
 	@Size(min = 3, max = 255)
@@ -70,12 +65,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getSenha() {
